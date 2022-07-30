@@ -1,0 +1,20 @@
+import requests
+import json
+import time
+import keyboard
+from playsound import playsound
+  
+
+data = {
+    "sentence":"ฮัลโหล เจอกันอีกแล้วนะคุณเสียงปัญญาประดิษฐ์ ทุกวันนี้มังคุดเจอหน้าคอมมากกว่าแมวที่บ้านอีก ห้าห้าห้า",
+    "length_scale": 0.91, #เปลี่ยนความเร็วความช้าของเสียงที่พูด ยิ่งเลขน้อยยิ่งพูดเร็ว
+    "pitch_scale": 1.2 #เปลี่ยนโทนเสียงของAI ยิ่งตัวเลขมากโทนเสียงยิ่งสูงขึ้น (ไม่แนะนำให้ปรับมากเกินไป)
+    
+}
+
+
+start_time = time.time()
+tts_result = requests.post("https://tts-api.dolabs.tech/tts",json=data)
+print(tts_result.elapsed)
+with open("sample.wav", "wb") as f:
+        f.write(tts_result.content)
